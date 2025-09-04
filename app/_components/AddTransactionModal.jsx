@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useData } from '../context/DataContext';
+import Modal from 'react-modal';
 
-export default function AddTransaction() {
-  const { updateBalance } = useAuth();
+export default function AddTransactionModal({ isOpen, onRequestClose }) {
+  const { addTransaction } = useData();
   const [formData, setFormData] = useState({
     type: 'expense',
     amount: '',
@@ -16,23 +17,30 @@ export default function AddTransaction() {
     e.preventDefault();
     const amount = parseFloat(formData.amount);
     if (amount > 0) {
-      updateBalance(
-        formData.type, 
-        amount, 
-        formData.description, 
-        formData.category
-      );
+      addTransaction({
+        type: formData.type,
+        amount: amount,
+        description: formData.description,
+        category: formData.category,
+      });
       setFormData({
         type: 'expense',
         amount: '',
         description: '',
         category: 'other'
       });
+      onRequestClose();
     }
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      contentLabel="Add Transaction"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 max-w-lg mx-auto mt-20"
+      overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+    >
       <h2 className="text-xl font-semibold mb-4 dark:text-white">Add Transaction</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -100,13 +108,22 @@ export default function AddTransaction() {
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all"
-        >
-          Add Transaction
-        </button>
+        <div className="flex justify-end gap-4">
+          <button
+            type="button"
+            onClick={onRequestClose}
+            className="px-6 py-2 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all"
+          >
+            Add Transaction
+          </button>
+        </div>
       </form>
-    </div>
+    </Modal>
   );
-} 
+}
