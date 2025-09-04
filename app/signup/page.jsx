@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -19,9 +18,29 @@ export default function SignUpPage() {
     setError('');
 
     try {
-      // In a real app, you would create the account here
-      await login(email, password); // For now, just log them in
-      router.push('/dashboard');
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (res.ok) {
+        const signInRes = await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+        });
+        if (signInRes.ok) {
+          router.push('/dashboard');
+        } else {
+          setError('Error signing in');
+        }
+      } else {
+        const { error } = await res.json();
+        setError(error);
+      }
     } catch (err) {
       setError('Error creating account');
     }

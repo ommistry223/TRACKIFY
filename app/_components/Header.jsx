@@ -53,6 +53,12 @@ function Header() {
             <Link href="/transactions" className="text-gray-700 dark:text-gray-300 hover:text-orange-500">
               Transactions
             </Link>
+            <Link href="/budgets" className="text-gray-700 dark:text-gray-300 hover:text-orange-500">
+              Budgets
+            </Link>
+            <Link href="/recurring" className="text-gray-700 dark:text-gray-300 hover:text-orange-500">
+              Recurring
+            </Link>
             <Link href="/profile" className="text-gray-700 dark:text-gray-300 hover:text-orange-500">
               Profile
             </Link>

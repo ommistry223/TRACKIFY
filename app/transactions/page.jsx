@@ -2,11 +2,11 @@
 
 import { useState, useMemo } from 'react';
 import Header from '../_components/Header';
-import { useAuth } from '../context/AuthContext';
+import { useData } from '../context/DataContext';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
 export default function TransactionsPage() {
-  const { transactions } = useAuth();
+  const { transactions } = useData();
   const [filter, setFilter] = useState({ type: 'all', category: 'all' });
   const [sort, setSort] = useState({ key: 'date', order: 'desc' });
 

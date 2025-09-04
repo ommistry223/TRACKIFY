@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -18,8 +17,17 @@ export default function LoginPage() {
     setError('');
 
     try {
-      await login(email, password);
-      router.push('/dashboard');
+      const res = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (res.ok) {
+        router.push('/dashboard');
+      } else {
+        setError('Invalid credentials');
+      }
     } catch (err) {
       setError('Invalid credentials');
     }

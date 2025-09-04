@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Header from '../_components/Header';
 import AddTransactionModal from '../_components/AddTransactionModal';
-import { useAuth } from '../context/AuthContext';
+import { useData } from '../context/DataContext';
 import { useTheme } from '../context/ThemeContext';
 import { Line, Doughnut } from 'react-chartjs-2';
 import {
@@ -30,7 +30,7 @@ ChartJS.register(
 );
 
 export default function Dashboard() {
-  const { balance, transactions } = useAuth();
+  const { balance, transactions } = useData();
   const { theme } = useTheme();
   const [selectedMonth, setSelectedMonth] = useState('');
   const [monthOptions, setMonthOptions] = useState([]);

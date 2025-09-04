@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useData } from '../context/DataContext';
 import Modal from 'react-modal';
 
 export default function AddTransactionModal({ isOpen, onRequestClose }) {
-  const { updateBalance } = useAuth();
+  const { addTransaction } = useData();
   const [formData, setFormData] = useState({
     type: 'expense',
     amount: '',
@@ -17,12 +17,12 @@ export default function AddTransactionModal({ isOpen, onRequestClose }) {
     e.preventDefault();
     const amount = parseFloat(formData.amount);
     if (amount > 0) {
-      updateBalance(
-        formData.type,
-        amount,
-        formData.description,
-        formData.category
-      );
+      addTransaction({
+        type: formData.type,
+        amount: amount,
+        description: formData.description,
+        category: formData.category,
+      });
       setFormData({
         type: 'expense',
         amount: '',
