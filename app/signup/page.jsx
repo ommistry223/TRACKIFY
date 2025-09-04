@@ -28,9 +28,9 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex dark:bg-gray-900">
       {/* Left Side - Sign Up Form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 bg-white">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 bg-white dark:bg-gray-900">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <Image 
@@ -40,8 +40,8 @@ export default function SignUpPage() {
               height={60} 
               className="mx-auto mb-4"
             />
-            <h2 className="text-3xl font-bold text-gray-900">Create an account</h2>
-            <p className="text-gray-600 mt-2">Start your financial journey today</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Create an account</h2>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">Start your financial journey today</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -52,7 +52,7 @@ export default function SignUpPage() {
             )}
 
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Full Name
               </label>
               <input
@@ -60,14 +60,14 @@ export default function SignUpPage() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                 placeholder="Enter your full name"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email
               </label>
               <input
@@ -75,14 +75,14 @@ export default function SignUpPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                 placeholder="Enter your email"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Password
               </label>
               <input
@@ -90,7 +90,7 @@ export default function SignUpPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                 placeholder="••••••••"
                 required
               />
@@ -100,10 +100,10 @@ export default function SignUpPage() {
               <input
                 id="terms"
                 type="checkbox"
-                className="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                className="h-4 w-4 text-orange-500 border-gray-300 dark:border-gray-600 rounded focus:ring-orange-500"
                 required
               />
-              <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+              <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-gray-300">
                 I agree to the{' '}
                 <Link href="/terms" className="text-orange-500 hover:text-orange-600">
                   Terms and Conditions
@@ -119,7 +119,7 @@ export default function SignUpPage() {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-gray-600">
+          <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-300">
             Already have an account?{' '}
             <Link href="/login" className="text-orange-500 hover:text-orange-600 font-medium">
               Sign in
@@ -129,13 +129,13 @@ export default function SignUpPage() {
       </div>
 
       {/* Right Side - Image */}
-      <div className="hidden lg:block lg:w-1/2 bg-orange-50">
+      <div className="hidden lg:block lg:w-1/2 bg-orange-50 dark:bg-orange-900/20">
         <div className="h-full flex items-center justify-center p-12">
           <div className="max-w-lg">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
               Join Our Community
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               Take control of your finances and join thousands of satisfied users who trust SpendWise for their expense tracking needs.
             </p>
           </div>

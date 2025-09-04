@@ -26,9 +26,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex dark:bg-gray-900">
       {/* Left Side - Login Form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 bg-white">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 bg-white dark:bg-gray-900">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <Image 
@@ -38,8 +38,8 @@ export default function LoginPage() {
               height={60} 
               className="mx-auto mb-4"
             />
-            <h2 className="text-3xl font-bold text-gray-900">Welcome back</h2>
-            <p className="text-gray-600 mt-2">Please enter your details</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome back</h2>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">Please enter your details</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -50,7 +50,7 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email
               </label>
               <input
@@ -58,14 +58,14 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                 placeholder="Enter your email"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Password
               </label>
               <input
@@ -73,7 +73,7 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                 placeholder="••••••••"
                 required
               />
@@ -84,9 +84,9 @@ export default function LoginPage() {
                 <input
                   id="remember"
                   type="checkbox"
-                  className="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                  className="h-4 w-4 text-orange-500 border-gray-300 dark:border-gray-600 rounded focus:ring-orange-500"
                 />
-                <label htmlFor="remember" className="ml-2 text-sm text-gray-600">
+                <label htmlFor="remember" className="ml-2 text-sm text-gray-600 dark:text-gray-300">
                   Remember me
                 </label>
               </div>
@@ -103,7 +103,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-gray-600">
+          <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-300">
             Don't have an account?{' '}
             <Link href="/signup" className="text-orange-500 hover:text-orange-600 font-medium">
               Sign up
@@ -113,13 +113,13 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Image */}
-      <div className="hidden lg:block lg:w-1/2 bg-orange-50">
+      <div className="hidden lg:block lg:w-1/2 bg-orange-50 dark:bg-orange-900/20">
         <div className="h-full flex items-center justify-center p-12">
           <div className="max-w-lg">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
               Track Your Expenses with Ease
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               Join thousands of users who trust SpendWise to manage their finances effectively.
             </p>
           </div>

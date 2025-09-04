@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Header from '../_components/Header';
+import { useTheme } from '../context/ThemeContext';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,6 +30,7 @@ ChartJS.register(
 );
 
 export default function ReportsPage() {
+  const { theme } = useTheme();
   const [timeframe, setTimeframe] = useState('month');
   const [category, setCategory] = useState('all');
 
@@ -79,17 +81,59 @@ export default function ReportsPage() {
     ],
   };
 
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          color: theme === 'dark' ? 'white' : 'black',
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: theme === 'dark' ? 'white' : 'black',
+        },
+        grid: {
+          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+        },
+      },
+      x: {
+        ticks: {
+          color: theme === 'dark' ? 'white' : 'black',
+        },
+        grid: {
+          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
+  };
+
+  const doughnutChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: {
+          color: theme === 'dark' ? 'white' : 'black',
+        },
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Financial Reports</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Financial Reports</h1>
           <div className="flex space-x-4">
             <select
               value={timeframe}
               onChange={(e) => setTimeframe(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="week">This Week</option>
               <option value="month">This Month</option>
@@ -98,7 +142,7 @@ export default function ReportsPage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               <option value="all">All Categories</option>
               <option value="food">Food</option>
@@ -109,69 +153,48 @@ export default function ReportsPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm">
-            <h2 className="text-xl font-semibold mb-4">Income vs Expenses</h2>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">Income vs Expenses</h2>
             <Line
               data={monthlyData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                },
-              }}
+              options={chartOptions}
             />
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm">
-            <h2 className="text-xl font-semibold mb-4">Spending by Category</h2>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">Spending by Category</h2>
             <Doughnut
               data={categoryData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'right',
-                  },
-                },
-              }}
+              options={doughnutChartOptions}
             />
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm md:col-span-2">
-            <h2 className="text-xl font-semibold mb-4">Daily Spending Pattern</h2>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm md:col-span-2">
+            <h2 className="text-xl font-semibold mb-4 dark:text-white">Daily Spending Pattern</h2>
             <Bar
               data={barData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                },
-              }}
+              options={chartOptions}
             />
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm">
-            <h3 className="text-lg font-semibold mb-2">Total Expenses</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 className="text-lg font-semibold mb-2 dark:text-white">Total Expenses</h3>
             <p className="text-3xl font-bold text-orange-500">$10,200</p>
-            <p className="text-sm text-gray-600">+12% from last month</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">+12% from last month</p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm">
-            <h3 className="text-lg font-semibold mb-2">Total Income</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 className="text-lg font-semibold mb-2 dark:text-white">Total Income</h3>
             <p className="text-3xl font-bold text-green-500">$16,200</p>
-            <p className="text-sm text-gray-600">+8% from last month</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">+8% from last month</p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm">
-            <h3 className="text-lg font-semibold mb-2">Savings</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 className="text-lg font-semibold mb-2 dark:text-white">Savings</h3>
             <p className="text-3xl font-bold text-blue-500">$6,000</p>
-            <p className="text-sm text-gray-600">+2% from last month</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">+2% from last month</p>
           </div>
         </div>
       </main>
